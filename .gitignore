@@ -1,0 +1,22 @@
+# Build
+bin/
+obj/
+
+# User-specific
+.vscode/
+*.user
+*.suo
+
+# Logs
+*.log
+
+# Database
+*.mdf
+*.ldf
+
+# Docker
+*.pid
+.env
+
+# Published files
+/app/publish/
