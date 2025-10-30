@@ -1,3 +1,7 @@
+# Ignore real configuration files
+WeatherApi/appsettings.json
+WeatherApi/appsettings.Development.json
+
 # Build
 bin/
 obj/
@@ -20,3 +24,4 @@ obj/
 
 # Published files
 /app/publish/
+/.vs/LogiTrack/FileContentIndex
