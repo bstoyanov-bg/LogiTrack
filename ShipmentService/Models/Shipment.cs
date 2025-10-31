@@ -4,10 +4,10 @@ namespace ShipmentService.Models
 {
     public enum ShipmentStatus
     {
-        Created,
-        InTransit,
-        Delivered,
-        Cancelled
+        Created = 1,
+        InTransit = 2,
+        Delivere = 3,
+        Cancelled = 4
     }
 
     public class Shipment

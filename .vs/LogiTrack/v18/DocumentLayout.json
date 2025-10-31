@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|c:\\users\\stoya\\source\\repos\\logitrack\\shipmentservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|solutionrelative:shipmentservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|c:\\users\\stoya\\source\\repos\\logitrack\\shipmentservice\\models\\shipment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|solutionrelative:shipmentservice\\models\\shipment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -11,20 +15,16 @@
       "RelativeMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|solutionrelative:shipmentservice\\controllers\\shipmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|c:\\users\\stoya\\source\\repos\\logitrack\\shipmentservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|solutionrelative:shipmentservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|c:\\users\\stoya\\source\\repos\\logitrack\\shipmentservice\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|solutionrelative:shipmentservice\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|c:\\users\\stoya\\source\\repos\\logitrack\\shipmentservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|solutionrelative:shipmentservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|c:\\users\\stoya\\source\\repos\\logitrack\\shipmentservice\\services\\shipmentcacheservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|solutionrelative:shipmentservice\\services\\shipmentcacheservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|c:\\users\\stoya\\source\\repos\\logitrack\\shipmentservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|solutionrelative:shipmentservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 257,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -71,58 +71,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "ShipmentsController.cs",
               "DocumentMoniker": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\Controllers\\ShipmentsController.cs",
               "RelativeDocumentMoniker": "ShipmentService\\Controllers\\ShipmentsController.cs",
               "ToolTip": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\Controllers\\ShipmentsController.cs",
               "RelativeToolTip": "ShipmentService\\Controllers\\ShipmentsController.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAACQAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAABMAAAAAAAAAAAAYwC4AAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-30T19:17:17.468Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "ShipmentCacheService.cs",
               "DocumentMoniker": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\Services\\ShipmentCacheService.cs",
               "RelativeDocumentMoniker": "ShipmentService\\Services\\ShipmentCacheService.cs",
               "ToolTip": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\Services\\ShipmentCacheService.cs",
               "RelativeToolTip": "ShipmentService\\Services\\ShipmentCacheService.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAEwCYAAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T19:04:36.438Z"
+              "WhenOpened": "2025-10-30T19:04:36.438Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Shipment.cs",
               "DocumentMoniker": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\Models\\Shipment.cs",
               "RelativeDocumentMoniker": "ShipmentService\\Models\\Shipment.cs",
               "ToolTip": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\Models\\Shipment.cs",
               "RelativeToolTip": "ShipmentService\\Models\\Shipment.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAEwAwAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-30T16:25:40.511Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\Program.cs",
               "RelativeDocumentMoniker": "ShipmentService\\Program.cs",
               "ToolTip": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\Program.cs",
               "RelativeToolTip": "ShipmentService\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-30T15:43:02.219Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\appsettings.json",
               "RelativeDocumentMoniker": "ShipmentService\\appsettings.json",

@@ -39,6 +39,11 @@ namespace ShipmentService.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Shipment shipment)
         {
+            if (shipment == null)
+            {
+                return BadRequest("Shipment is null");
+            }
+
             _dbContext.Shipments.Add(shipment);
             await _dbContext.SaveChangesAsync();
 
