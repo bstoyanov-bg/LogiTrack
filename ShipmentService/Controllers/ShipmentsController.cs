@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using ShipmentService.Data;
 using ShipmentService.Models;
 using ShipmentService.Services;
