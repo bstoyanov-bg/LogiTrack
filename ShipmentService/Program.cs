@@ -1,6 +1,9 @@
+using DriverService;
 using Microsoft.EntityFrameworkCore;
 using ShipmentService.Data;
 using ShipmentService.Services;
+
+AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +23,13 @@ builder.Services.AddControllers();
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddGrpcClient<DriverManager.DriverManagerClient>(o =>
+{
+    o.Address = new Uri("http://localhost:5084");
+});
+
+AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
 
 var app = builder.Build();
 

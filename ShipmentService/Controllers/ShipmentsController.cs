@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DriverService;
+using Microsoft.AspNetCore.Mvc;
 using ShipmentService.Data;
 using ShipmentService.Models;
 using ShipmentService.Services;
@@ -11,11 +12,18 @@ namespace ShipmentService.Controllers
     {
         private readonly AppDbContext _dbContext;
         private readonly ShipmentCacheService _cache;
+        private readonly ILogger<ShipmentsController> _logger;
+        private readonly DriverManager.DriverManagerClient _driverClient;
 
-        public ShipmentsController(AppDbContext dbContext, ShipmentCacheService cache)
+        public ShipmentsController(AppDbContext dbContext, 
+            ShipmentCacheService cache, 
+            ILogger<ShipmentsController> logger, 
+            DriverManager.DriverManagerClient driverClient)
         {
             _dbContext = dbContext;
             _cache = cache;
+            _logger = logger;
+            _driverClient = driverClient;
         }
 
         [HttpGet("{id}")]
@@ -46,6 +54,18 @@ namespace ShipmentService.Controllers
 
             _dbContext.Shipments.Add(shipment);
             await _dbContext.SaveChangesAsync();
+
+
+            // Симулираме назначаване на шофьор (driverId = 1)
+            var assignRequest = new AssignShipmentRequest
+            {
+                DriverId = 1,
+                ShipmentId = shipment.Id
+            };
+
+            var reply = await _driverClient.AssignShipmentAsync(assignRequest);
+            _logger.LogInformation($"gRPC reply: {reply.Message}");
+
 
             await _cache.SetShipmentAsync(shipment);
 

@@ -6,7 +6,7 @@ namespace ShipmentService.Models
     {
         Created = 1,
         InTransit = 2,
-        Delivere = 3,
+        Delivered = 3,
         Cancelled = 4
     }
 

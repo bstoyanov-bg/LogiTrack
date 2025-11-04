@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option csharp_namespace = "DriverService";
+
+package driver;
+
+service DriverManager {
+  rpc AssignShipment (AssignShipmentRequest) returns (AssignShipmentReply);
+  rpc UpdateDriverStatus (UpdateDriverStatusRequest) returns (UpdateDriverStatusReply);
+}
+
+message AssignShipmentRequest {
+  int32 driverId = 1;
+  int32 shipmentId = 2;
+}
+
+message AssignShipmentReply {
+  bool success = 1;
+  string message = 2;
+}
+
+message UpdateDriverStatusRequest {
+  int32 driverId = 1;
+  string status = 2; // e.g. "Available", "OnRoute", "Resting"
+}
+
+message UpdateDriverStatusReply {
+  bool success = 1;
+  string message = 2;
+}
