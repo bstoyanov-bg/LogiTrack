@@ -66,10 +66,32 @@ namespace ShipmentService.Controllers
             var reply = await _driverClient.AssignShipmentAsync(assignRequest);
             _logger.LogInformation($"gRPC reply: {reply.Message}");
 
-
+            // Store the new shipment in cache
             await _cache.SetShipmentAsync(shipment);
 
             return CreatedAtAction(nameof(GetById), new { id = shipment.Id }, shipment);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, Shipment updatedShipment)
+        {
+            var existing = await _dbContext.Shipments.FindAsync(id);
+            if (existing == null)
+                return NotFound();
+
+            // Update properties
+            existing.TrackingNumber = updatedShipment.TrackingNumber;
+            existing.Origin = updatedShipment.Origin;
+            existing.Destination = updatedShipment.Destination;
+            existing.Status = updatedShipment.Status;
+            existing.CreatedAt = updatedShipment.CreatedAt;
+
+            await _dbContext.SaveChangesAsync();
+
+            // Update cache entry
+            await _cache.SetShipmentAsync(existing);
+
+            return Ok(existing);
         }
 
         [HttpDelete("{id}")]
@@ -81,6 +103,7 @@ namespace ShipmentService.Controllers
             _dbContext.Shipments.Remove(shipment);
             await _dbContext.SaveChangesAsync();
 
+            // Remove it from cache
             await _cache.RemoveShipmentAsync(id);
 
             return NoContent();
