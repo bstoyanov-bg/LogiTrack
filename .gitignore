@@ -2,14 +2,19 @@
 WeatherApi/appsettings.json
 WeatherApi/appsettings.Development.json
 
-# Build
+# Build output
 bin/
 obj/
+out/
+Debug/
+Release/
 
-# User-specific
-.vscode/
+# Visual Studio
+.vs/
 *.user
 *.suo
+*.userosscache
+*.sln.docstates
 
 # Logs
 *.log
@@ -18,10 +23,19 @@ obj/
 *.mdf
 *.ldf
 
+# Other tools
+node_modules/
+dist/
+.env
+
 # Docker
 *.pid
-.env
 
 # Published files
 /app/publish/
 /.vs/LogiTrack/FileContentIndex
+
+# VS local config
+*.dtbcache.v2
+DocumentLayout.json
+DocumentLayout.backup.json
