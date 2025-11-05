@@ -1,6 +1,7 @@
 using DriverService;
 using Microsoft.EntityFrameworkCore;
 using ShipmentService.Data;
+using ShipmentService.Middleware;
 using ShipmentService.Services;
 
 AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
@@ -41,6 +42,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Custom middleware to measure request time
+app.UseResponseTimeMiddleware();
 
 app.MapControllers();
 

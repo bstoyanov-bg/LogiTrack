@@ -32,7 +32,10 @@ namespace ShipmentService.Controllers
             // Try from cache
             var cachedShipment = await _cache.GetShipmentAsync(id);
             if (cachedShipment != null)
+            {
+                Response.Headers["X-Data-Source"] = "Cache";
                 return Ok(cachedShipment);
+            }
 
             // If not get from DB
             var shipment = await _dbContext.Shipments.FindAsync(id);
@@ -41,6 +44,7 @@ namespace ShipmentService.Controllers
             // Write in cache
             await _cache.SetShipmentAsync(shipment);
 
+            Response.Headers["X-Data-Source"] = "DB";
             return Ok(shipment);
         }
 

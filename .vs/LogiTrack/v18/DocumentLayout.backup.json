@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|c:\\users\\stoya\\source\\repos\\logitrack\\shipmentservice\\shipmentservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|solutionrelative:shipmentservice\\shipmentservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|c:\\users\\stoya\\source\\repos\\logitrack\\shipmentservice\\middleware\\responsetimemiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|solutionrelative:shipmentservice\\middleware\\responsetimemiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|c:\\users\\stoya\\source\\repos\\logitrack\\shipmentservice\\controllers\\shipmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|solutionrelative:shipmentservice\\controllers\\shipmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|c:\\users\\stoya\\source\\repos\\logitrack\\shipmentservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -17,14 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|c:\\users\\stoya\\source\\repos\\logitrack\\shipmentservice\\services\\shipmentcacheservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|solutionrelative:shipmentservice\\services\\shipmentcacheservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|c:\\users\\stoya\\source\\repos\\logitrack\\shipmentservice\\controllers\\shipmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|solutionrelative:shipmentservice\\controllers\\shipmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|c:\\users\\stoya\\source\\repos\\logitrack\\shipmentservice\\utils\\cachekeys.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE410922-3FDE-40CE-8761-717CD3B35208}|ShipmentService\\ShipmentService.csproj|solutionrelative:shipmentservice\\utils\\cachekeys.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EC37077E-0749-4CAC-AFFF-9CF5A9606C99}|DriverService\\DriverService.csproj|c:\\users\\stoya\\source\\repos\\logitrack\\driverservice\\services\\drivermanagerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -79,32 +75,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ShipmentService",
-              "DocumentMoniker": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\ShipmentService.csproj",
-              "RelativeDocumentMoniker": "ShipmentService\\ShipmentService.csproj",
-              "ToolTip": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\ShipmentService.csproj",
-              "RelativeToolTip": "ShipmentService\\ShipmentService.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-11-05T12:58:17.156Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CacheKeys.cs",
-              "DocumentMoniker": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\Utils\\CacheKeys.cs",
-              "RelativeDocumentMoniker": "ShipmentService\\Utils\\CacheKeys.cs",
-              "ToolTip": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\Utils\\CacheKeys.cs",
-              "RelativeToolTip": "ShipmentService\\Utils\\CacheKeys.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Title": "ResponseTimeMiddleware.cs",
+              "DocumentMoniker": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\Middleware\\ResponseTimeMiddleware.cs",
+              "RelativeDocumentMoniker": "ShipmentService\\Middleware\\ResponseTimeMiddleware.cs",
+              "ToolTip": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\Middleware\\ResponseTimeMiddleware.cs",
+              "RelativeToolTip": "ShipmentService\\Middleware\\ResponseTimeMiddleware.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-05T12:56:21.291Z",
+              "WhenOpened": "2025-11-05T13:07:54.944Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\DriverService\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "DriverService\\Properties\\launchSettings.json",
@@ -117,7 +100,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "DriverManagerService.cs",
               "DocumentMoniker": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\DriverService\\Services\\DriverManagerService.cs",
               "RelativeDocumentMoniker": "DriverService\\Services\\DriverManagerService.cs",
@@ -130,7 +113,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "driver.proto",
               "DocumentMoniker": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\DriverService\\Protos\\driver.proto",
               "RelativeDocumentMoniker": "DriverService\\Protos\\driver.proto",
@@ -143,7 +126,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 9,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "ShipmentService\\Properties\\launchSettings.json",
@@ -156,20 +139,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "ShipmentsController.cs",
               "DocumentMoniker": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\Controllers\\ShipmentsController.cs",
               "RelativeDocumentMoniker": "ShipmentService\\Controllers\\ShipmentsController.cs",
               "ToolTip": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\Controllers\\ShipmentsController.cs",
               "RelativeToolTip": "ShipmentService\\Controllers\\ShipmentsController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAIwB4AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-30T19:17:17.468Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "ShipmentCacheService.cs",
               "DocumentMoniker": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\Services\\ShipmentCacheService.cs",
               "RelativeDocumentMoniker": "ShipmentService\\Services\\ShipmentCacheService.cs",
@@ -182,7 +165,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Shipment.cs",
               "DocumentMoniker": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\Models\\Shipment.cs",
               "RelativeDocumentMoniker": "ShipmentService\\Models\\Shipment.cs",
@@ -195,20 +178,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\Program.cs",
               "RelativeDocumentMoniker": "ShipmentService\\Program.cs",
               "ToolTip": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\Program.cs",
               "RelativeToolTip": "ShipmentService\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-30T15:43:02.219Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 8,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\stoya\\source\\repos\\LogiTrack\\ShipmentService\\appsettings.json",
               "RelativeDocumentMoniker": "ShipmentService\\appsettings.json",
