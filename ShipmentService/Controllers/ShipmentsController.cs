@@ -1,6 +1,8 @@
 ﻿using DriverService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using ShipmentService.Data;
+using ShipmentService.Hubs;
 using ShipmentService.Models;
 using ShipmentService.Services;
 
@@ -14,16 +16,20 @@ namespace ShipmentService.Controllers
         private readonly ShipmentCacheService _cache;
         private readonly ILogger<ShipmentsController> _logger;
         private readonly DriverManager.DriverManagerClient _driverClient;
+        private readonly IHubContext<ShipmentHub> _hubContext;
+
 
         public ShipmentsController(AppDbContext dbContext, 
             ShipmentCacheService cache, 
             ILogger<ShipmentsController> logger, 
-            DriverManager.DriverManagerClient driverClient)
+            DriverManager.DriverManagerClient driverClient,
+            IHubContext<ShipmentHub> hubContext)
         {
             _dbContext = dbContext;
             _cache = cache;
             _logger = logger;
             _driverClient = driverClient;
+            _hubContext = hubContext;
         }
 
         [HttpGet("{id}")]
@@ -68,6 +74,8 @@ namespace ShipmentService.Controllers
             var reply = await _driverClient.AssignShipmentAsync(assignRequest);
             _logger.LogInformation($"gRPC reply: {reply.Message}");
 
+            await _hubContext.Clients.All.SendAsync("ShipmentCreated", shipment);
+
             // Store the new shipment in cache
             await _cache.SetShipmentAsync(shipment);
 
@@ -90,6 +98,8 @@ namespace ShipmentService.Controllers
 
             await _dbContext.SaveChangesAsync();
 
+            await _hubContext.Clients.All.SendAsync("ShipmentUpdated", existing);
+
             // Update cache entry
             await _cache.SetShipmentAsync(existing);
 
@@ -104,6 +114,8 @@ namespace ShipmentService.Controllers
 
             _dbContext.Shipments.Remove(shipment);
             await _dbContext.SaveChangesAsync();
+
+            await _hubContext.Clients.All.SendAsync("ShipmentDeleted", id);
 
             // Remove it from cache
             await _cache.RemoveShipmentAsync(id);

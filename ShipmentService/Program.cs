@@ -1,6 +1,7 @@
-using DriverService;
+﻿using DriverService;
 using Microsoft.EntityFrameworkCore;
 using ShipmentService.Data;
+using ShipmentService.Hubs;
 using ShipmentService.Middleware;
 using ShipmentService.Services;
 
@@ -17,6 +18,19 @@ builder.Services.AddStackExchangeRedisCache(options =>
     options.Configuration = builder.Configuration["Redis:ConnectionString"];
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularClient", policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:4200") // for future Angular dev URL
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials(); // for SignalR
+    });
+});
+
+
 builder.Services.AddScoped<ShipmentCacheService>();
 
 builder.Services.AddControllers();
@@ -24,6 +38,9 @@ builder.Services.AddControllers();
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// SignalR
+builder.Services.AddSignalR();
 
 builder.Services.AddGrpcClient<DriverManager.DriverManagerClient>(o =>
 {
@@ -43,9 +60,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("AllowAngularClient");
+
 // Custom middleware to measure request time
 app.UseResponseTimeMiddleware();
 
 app.MapControllers();
+// SignalR Hubs
+app.MapHub<ShipmentHub>("/hubs/shipments");
+
 
 app.Run();
