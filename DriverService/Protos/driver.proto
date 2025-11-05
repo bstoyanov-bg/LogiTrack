@@ -5,8 +5,18 @@ option csharp_namespace = "DriverService";
 package driver;
 
 service DriverManager {
+  // Assigns a shipment to an available driver
   rpc AssignShipment (AssignShipmentRequest) returns (AssignShipmentReply);
+
+  // Updates driver status
   rpc UpdateDriverStatus (UpdateDriverStatusRequest) returns (UpdateDriverStatusReply);
+
+  // Registers a new driver
+  rpc RegisterDriver (RegisterDriverRequest) returns (RegisterDriverReply);
+
+  // Retrieves all drivers
+  rpc GetAllDrivers (Empty) returns (DriverListReply);
+
 }
 
 message AssignShipmentRequest {
@@ -15,7 +25,7 @@ message AssignShipmentRequest {
 }
 
 message AssignShipmentReply {
-  bool success = 1;
+  int32 driverId = 1;
   string message = 2;
 }
 
@@ -28,3 +38,24 @@ message UpdateDriverStatusReply {
   bool success = 1;
   string message = 2;
 }
+
+message RegisterDriverRequest {
+  string name = 1;
+}
+
+message RegisterDriverReply {
+  int32 driverId = 1;
+  string message = 2;
+}
+
+message Driver {
+  int32 id = 1;
+  string name = 2;
+  string status = 3;
+}
+
+message DriverListReply {
+  repeated Driver drivers = 1;
+}
+
+message Empty {}

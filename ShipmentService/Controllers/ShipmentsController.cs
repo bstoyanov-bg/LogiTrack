@@ -55,11 +55,9 @@ namespace ShipmentService.Controllers
             _dbContext.Shipments.Add(shipment);
             await _dbContext.SaveChangesAsync();
 
-
-            // Симулираме назначаване на шофьор (driverId = 1)
+            // Request driver assignment dynamically via gRPC
             var assignRequest = new AssignShipmentRequest
             {
-                DriverId = 1,
                 ShipmentId = shipment.Id
             };
 
