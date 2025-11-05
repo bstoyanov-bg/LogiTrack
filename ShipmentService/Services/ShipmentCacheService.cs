@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using ShipmentService.Models;
+using ShipmentService.Utils;
 using System.Text.Json;
 
 namespace ShipmentService.Services
@@ -20,7 +21,7 @@ namespace ShipmentService.Services
 
         }
 
-        private static string GetCacheKey(int id) => $"shipment:{id}";
+        private static string GetCacheKey(int id) => CacheKeys.Shipment(id);
 
         public async Task<Shipment?> GetShipmentAsync(int id)
         {

@@ -9,6 +9,7 @@
 	<ItemGroup>
 		<PackageReference Include="Google.Protobuf" Version="3.33.0" />
 		<PackageReference Include="Grpc.Net.Client" Version="2.71.0" />
+		<PackageReference Include="Grpc.Net.ClientFactory" Version="2.71.0" />
 		<PackageReference Include="Grpc.Tools" Version="2.76.0">
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		  <PrivateAssets>all</PrivateAssets>
@@ -22,10 +23,6 @@
 		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.10" />
 		<PackageReference Include="StackExchange.Redis" Version="2.9.32" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\DriverService\DriverService.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
