@@ -1,0 +1,47 @@
+<mat-card>
+  <h2>Shipments Dashboard</h2>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="trackingNumber">
+      <th mat-header-cell *matHeaderCellDef> Tracking # </th>
+      <td mat-cell *matCellDef="let element"> {{element.trackingNumber}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="origin">
+      <th mat-header-cell *matHeaderCellDef> Origin </th>
+      <td mat-cell *matCellDef="let element"> {{element.origin}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="destination">
+      <th mat-header-cell *matHeaderCellDef> Destination </th>
+      <td mat-cell *matCellDef="let element"> {{element.destination}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
+
+    <!-- ✅ Missing Actions column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="primary" (click)="viewShipment(element)">
+          <mat-icon>visibility</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteShipment(element.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</mat-card>

@@ -24,9 +24,17 @@ Release/
 *.ldf
 
 # Other tools
-node_modules/
 dist/
 .env
+
+# Angular / Node.js
+node_modules/
+dist/
+.angular/
+*.log
+.vscode/
+e2e/*.js
+e2e/*.map
 
 # Docker
 *.pid
