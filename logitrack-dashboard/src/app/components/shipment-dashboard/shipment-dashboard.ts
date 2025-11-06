@@ -4,6 +4,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { Shipment, ShipmentService } from '../../services/shipment';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-shipment-dashboard',
@@ -19,6 +21,9 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './shipment-dashboard.scss'
 })
 export class ShipmentDashboardComponent implements OnInit {
+  shipments$!: Observable<Shipment[]>;
+
+  constructor(private shipmentService: ShipmentService) {}
 
   displayedColumns: string[] = ['id', 'trackingNumber', 'origin', 'destination', 'status', 'actions'];
   dataSource = [
@@ -27,7 +32,9 @@ export class ShipmentDashboardComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    console.log('ShipmentDashboardComponent loaded');
+    this.shipments$ = this.shipmentService.shipments$;
+    this.shipmentService.loadShipments();
+    this.shipmentService.initSignalR();
   }
 
   viewShipment(shipment: any) {
@@ -35,6 +42,6 @@ export class ShipmentDashboardComponent implements OnInit {
   }
 
   deleteShipment(id: number) {
-    console.log('Del with ID:', id);
+    console.log('Delete shipment with ID:', id);
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -17,23 +17,29 @@ export interface Shipment {
 export class ShipmentService {
   private shipmentsSubject = new BehaviorSubject<Shipment[]>([]);
   shipments$ = this.shipmentsSubject.asObservable();
-
-  private hubConnection!: HubConnection;
+  private hubConnection?: HubConnection;
 
   constructor(private http: HttpClient) {}
 
-  // Load initial list from API
+  /** Load initial shipment list from backend API */
   loadShipments() {
     this.http.get<Shipment[]>(`${environment.apiBaseUrl}/Shipments`)
-      .subscribe(data => this.shipmentsSubject.next(data));
+      .subscribe({
+        next: (data) => this.shipmentsSubject.next(data),
+        error: (err) => console.error('❌ Failed to load shipments', err)
+      });
   }
 
-  // Connect to SignalR Hub
+  /** Initialize real-time SignalR connection */
   initSignalR() {
+    if (this.hubConnection) return; // Prevent double connection
+
     this.hubConnection = new HubConnectionBuilder()
       .withUrl(environment.signalRHubUrl)
+      .configureLogging(LogLevel.Information)
       .build();
 
+    // Handle events from backend
     this.hubConnection.on('ShipmentCreated', (shipment: Shipment) => {
       const current = this.shipmentsSubject.value;
       this.shipmentsSubject.next([...current, shipment]);
@@ -49,8 +55,14 @@ export class ShipmentService {
       this.shipmentsSubject.next(filtered);
     });
 
-    this.hubConnection.start()
-      .then(() => console.log('✅ SignalR connected'))
-      .catch(err => console.error('❌ SignalR connection failed', err));
+    this.hubConnection
+      .start()
+      .then(() => console.log('✅ SignalR connected to ShipmentHub'))
+      .catch(err => console.error('❌ SignalR connection failed:', err));
+  }
+
+  /** Stop connection (optional, e.g. when user logs out) */
+  stopSignalR() {
+    this.hubConnection?.stop();
   }
 }
