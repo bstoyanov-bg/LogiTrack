@@ -1,0 +1,32 @@
+<div class="p-6">
+  <h2 class="text-2xl font-semibold mb-4">System Health Monitor</h2>
+
+  <div class="grid grid-cols-3 gap-4">
+    <div class="p-4 rounded-xl shadow bg-white">
+      <h3 class="font-medium mb-2">API Service</h3>
+      <span [class.text-green-600]="health.apiStatus$ | async" 
+            [class.text-red-600]="!(health.apiStatus$ | async)">
+        {{ (health.apiStatus$ | async) ? '🟢 Online' : '🔴 Offline' }}
+      </span>
+    </div>
+
+    <div class="p-4 rounded-xl shadow bg-white">
+      <h3 class="font-medium mb-2">Redis Cache</h3>
+      <span [class.text-green-600]="health.redisStatus$ | async" 
+            [class.text-red-600]="!(health.redisStatus$ | async)">
+        {{ (health.redisStatus$ | async) ? '🟢 Connected' : '🔴 Disconnected' }}
+      </span>
+    </div>
+
+    <div class="p-4 rounded-xl shadow bg-white">
+  <h3 class="font-medium mb-2">SignalR Hub</h3>
+  <span [class.text-green-600]="health.signalRStatus$ | async" 
+        [class.text-red-600]="!(health.signalRStatus$ | async)">
+    {{ (health.signalRStatus$ | async) ? '🟢 Connected' : '🔴 Disconnected' }}
+  </span>
+</div>
+  </div>
+  <br/>
+
+  <button class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg" (click)="refresh()">🔄 Refresh</button>
+</div>

@@ -4,7 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { Shipment, ShipmentService } from '../../services/shipment';
+import { Shipment, ShipmentService } from '../../services/shipment.service';
 import { Observable } from 'rxjs';
 
 @Component({
