@@ -1,10 +1,13 @@
 ﻿using DriverService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 using ShipmentService.Data;
 using ShipmentService.Hubs;
 using ShipmentService.Models;
 using ShipmentService.Services;
+using System.Text.Json;
 
 namespace ShipmentService.Controllers
 {
@@ -30,6 +33,24 @@ namespace ShipmentService.Controllers
             _logger = logger;
             _driverClient = driverClient;
             _hubContext = hubContext;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var cachedShipments = await _cache.GetAllShipmentsAsync();
+            if (cachedShipments != null)
+            {
+                _logger.LogInformation("✅ Shipments loaded from cache");
+                return Ok(cachedShipments);
+            }
+
+            var shipments = await _dbContext.Shipments.ToListAsync();
+            _logger.LogInformation("📦 Shipments loaded from DB");
+
+            await _cache.SetAllShipmentsAsync(shipments);
+
+            return Ok(shipments);
         }
 
         [HttpGet("{id}")]
@@ -79,6 +100,8 @@ namespace ShipmentService.Controllers
             // Store the new shipment in cache
             await _cache.SetShipmentAsync(shipment);
 
+            await _cache.RemoveAllShipmentsAsync();
+
             return CreatedAtAction(nameof(GetById), new { id = shipment.Id }, shipment);
         }
 
@@ -103,6 +126,8 @@ namespace ShipmentService.Controllers
             // Update cache entry
             await _cache.SetShipmentAsync(existing);
 
+            await _cache.RemoveAllShipmentsAsync();
+
             return Ok(existing);
         }
 
@@ -119,6 +144,8 @@ namespace ShipmentService.Controllers
 
             // Remove it from cache
             await _cache.RemoveShipmentAsync(id);
+
+            await _cache.RemoveAllShipmentsAsync();
 
             return NoContent();
         }

@@ -23,6 +23,7 @@ namespace ShipmentService.Services
 
         private static string GetCacheKey(int id) => CacheKeys.Shipment(id);
 
+        // Get a single shipment from cache
         public async Task<Shipment?> GetShipmentAsync(int id)
         {
             var cached = await _cache.GetStringAsync(GetCacheKey(id));
@@ -31,15 +32,37 @@ namespace ShipmentService.Services
             return JsonSerializer.Deserialize<Shipment>(cached);
         }
 
+        // Store a single shipment
         public async Task SetShipmentAsync(Shipment shipment)
         {
             var serialized = JsonSerializer.Serialize(shipment);
             await _cache.SetStringAsync(GetCacheKey(shipment.Id), serialized, _cacheOptions);
         }
 
+        // Remove a single shipment
         public async Task RemoveShipmentAsync(int id)
         {
             await _cache.RemoveAsync(GetCacheKey(id));
+        }
+
+        // Get all shipments (cached list)
+        public async Task<List<Shipment>?> GetAllShipmentsAsync()
+        {
+            var cached = await _cache.GetStringAsync(CacheKeys.AllShipments);
+            return cached == null ? null : JsonSerializer.Deserialize<List<Shipment>>(cached);
+        }
+
+        // Set all shipments
+        public async Task SetAllShipmentsAsync(List<Shipment> shipments)
+        {
+            var serialized = JsonSerializer.Serialize(shipments);
+            await _cache.SetStringAsync(CacheKeys.AllShipments, serialized, _cacheOptions);
+        }
+
+        // Remove cached list
+        public async Task RemoveAllShipmentsAsync()
+        {
+            await _cache.RemoveAsync(CacheKeys.AllShipments);
         }
     }
 }
