@@ -29,7 +29,7 @@ export class DriverService {
   }
 
   updateStatus(id: number, status: string): Observable<Driver> {
-    return this.http.put<Driver>(`${this.apiUrl}/${id}/status`, status, {
+    return this.http.put<Driver>(`${this.apiUrl}/${id}/status`, `"${status}"`, {
       headers: { 'Content-Type': 'application/json' },
     });
   }

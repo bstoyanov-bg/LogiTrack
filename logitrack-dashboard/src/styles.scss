@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+::ng-deep .mat-select-panel {
+  background-color: #ffffff !important;
+  color: #000 !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+::ng-deep .mat-option {
+  background: #ffffff !important;
+}
+
+::ng-deep .mat-option:hover:not(.mat-option-disabled) {
+  background: #e0e0e0 !important;
+}
