@@ -12,14 +12,25 @@ export interface Driver {
 
 @Injectable({ providedIn: 'root' })
 export class DriverService {
-  private api = environment.driverApiBaseUrl || environment.shipmentServiceBaseUrl.replace('/api','') + '/api/drivers';
+  private apiUrl = `${environment.driverApiBaseUrl}/drivers`;
+
   constructor(private http: HttpClient) {}
 
   getDrivers(): Observable<Driver[]> {
-    return this.http.get<Driver[]>(this.api);
+    return this.http.get<Driver[]>(this.apiUrl);
   }
 
   getDriver(id: number): Observable<Driver> {
-    return this.http.get<Driver>(`${this.api}/${id}`);
+    return this.http.get<Driver>(`${this.apiUrl}/${id}`);
+  }
+
+  registerDriver(name: string): Observable<Driver> {
+    return this.http.post<Driver>(`${this.apiUrl}/register`, { name });
+  }
+
+  updateStatus(id: number, status: string): Observable<Driver> {
+    return this.http.put<Driver>(`${this.apiUrl}/${id}/status`, status, {
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 }

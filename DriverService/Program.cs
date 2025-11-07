@@ -59,6 +59,9 @@ using (var scope = app.Services.CreateScope())
 
 app.UseCors("AllowAngularClient");
 
+// REST API endpoints
+app.MapControllers();
+
 // gRPC endpoints
 app.MapGrpcService<DriverManagerService>();
 app.MapGet("/", () => "gRPC DriverService is running. Use a gRPC client to connect.");
