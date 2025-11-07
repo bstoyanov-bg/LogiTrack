@@ -48,9 +48,31 @@ The platform currently consists of the following key components:
 
 ```mermaid
 graph TD
-    UI[Angular Dashboard] -->|REST / SignalR| A[ShipmentService]
-    A -->|SQL Queries| B[(SQL Server - Shipments)]
-    A -->|Cache Read/Write| C[(Redis Cache)]
-    A -->|gRPC Call| D[DriverService]
-    D -->|SQL Queries| E[(SQL Server - Drivers)]
-    A -->|Health Check| F[/Health Endpoints/]
+    subgraph Frontend
+        UI[Angular Dashboard]
+    end
+
+    subgraph ShipmentLayer
+        A[ShipmentService]
+        B[(SQL Server - Shipments)]
+        C[(Redis Cache)]
+    end
+
+    subgraph DriverLayer
+        D[DriverService]
+        E[(SQL Server - Drivers)]
+    end
+
+    subgraph Monitoring
+        F[/Health Endpoints/]
+    end
+
+    %% Connections
+    UI -->|REST / SignalR| A
+    UI -->|REST| D
+    A -->|SQL Queries| B
+    A -->|Cache Read/Write| C
+    A -->|gRPC Call| D
+    D -->|SQL Queries| E
+    A -->|/health| F
+    D -->|/health| F
