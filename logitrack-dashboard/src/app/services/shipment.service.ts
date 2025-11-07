@@ -26,7 +26,7 @@ export class ShipmentService {
 
   /** Load initial shipment list from backend API */
   loadShipments() {
-    this.http.get<Shipment[]>(`${environment.apiBaseUrl}/Shipments`)
+    this.http.get<Shipment[]>(`${environment.shipmentServiceBaseUrl}/Shipments`)
       .subscribe({
         next: (data) => this.shipmentsSubject.next(data),
         error: (err) => console.error('❌ Failed to load shipments', err)

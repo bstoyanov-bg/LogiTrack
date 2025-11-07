@@ -12,7 +12,7 @@ export interface Driver {
 
 @Injectable({ providedIn: 'root' })
 export class DriverService {
-  private api = environment.driverApiBaseUrl || environment.apiBaseUrl.replace('/api','') + '/api/drivers';
+  private api = environment.driverApiBaseUrl || environment.shipmentServiceBaseUrl.replace('/api','') + '/api/drivers';
   constructor(private http: HttpClient) {}
 
   getDrivers(): Observable<Driver[]> {

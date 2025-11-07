@@ -27,5 +27,7 @@ export class HealthDashboardComponent implements OnInit, OnDestroy {
   refresh() {
     this.health.checkApi();
     this.health.checkRedis();
+    this.health.checkDriverService();
+    this.health.checkDriverDb();
   }
 }

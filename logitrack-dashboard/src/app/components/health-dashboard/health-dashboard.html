@@ -19,17 +19,37 @@
     </div>
 
     <div class="p-4 rounded-xl shadow bg-white">
-  <h3 class="font-medium mb-2">SignalR Hub</h3>
-  <span [class.text-green-600]="health.signalRStatus$ | async" 
+      <h3 class="font-medium mb-2">DriverService (gRPC)</h3>
+      <span [class.text-green-600]="health.driverServiceStatus$ | async"
+        [class.text-red-600]="!(health.driverServiceStatus$ | async)">
+        {{ (health.driverServiceStatus$ | async) ? '🟢 Healthy' : '🔴 Down' }}
+      </span>
+    </div>
+
+    <div class="p-4 rounded-xl shadow bg-white">
+      <h3 class="font-medium mb-2">DriverService DB</h3>
+      <span [class.text-green-600]="health.driverDbStatus$ | async"
+            [class.text-red-600]="!(health.driverDbStatus$ | async)">
+        {{ (health.driverDbStatus$ | async) ? '🟢 Online' : '🔴 Unavailable' }}
+      </span>
+    </div>
+
+    <div class="p-4 rounded-xl shadow bg-white">
+      <h3 class="font-medium mb-2">SignalR Hub</h3>
+      <span [class.text-green-600]="health.signalRStatus$ | async" 
         [class.text-red-600]="!(health.signalRStatus$ | async)">
-    {{ (health.signalRStatus$ | async) ? '🟢 Connected' : '🔴 Disconnected' }}
-  </span>
-</div>
+        {{ (health.signalRStatus$ | async) ? '🟢 Connected' : '🔴 Disconnected' }}
+      </span>
+    </div>
   </div>
+
   <br/>
+  
   <div class="text-gray-500 text-sm mt-4 italic">
     Auto-refreshing every 10 seconds, but if you feel doing it manually just push the button
   </div>
+
   <br/>
+
   <button class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg" (click)="refresh()">🔄 Refresh</button>
 </div>

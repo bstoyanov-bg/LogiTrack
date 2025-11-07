@@ -23,7 +23,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowAngularClient", policy =>
     {
         policy
-            .WithOrigins("http://localhost:4200") // for future Angular dev URL
+            .WithOrigins("http://localhost:4200")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials(); // for SignalR
@@ -67,7 +67,7 @@ app.UseResponseTimeMiddleware();
 
 app.MapControllers();
 // SignalR Hubs
-app.MapHub<ShipmentHub>("/hubs/shipments");
+app.MapHub<ShipmentHub>("/hub/shipments");
 
 
 app.Run();

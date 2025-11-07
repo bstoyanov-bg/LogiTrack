@@ -2,6 +2,7 @@ using DriverService.Data;
 using DriverService.Models;
 using DriverService.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,12 +12,27 @@ var configuration = builder.Configuration;
 // Add services to the container.
 builder.Services.AddGrpc();
 
+// Add HealthChecks
+builder.Services.AddHealthChecks()
+    .AddDbContextCheck<DriverDbContext>(name: "Database")
+    .AddCheck("self", () => HealthCheckResult.Healthy());
+
 // EF Core + SQL Server
 builder.Services.AddDbContext<DriverDbContext>(options =>
     options.UseSqlServer(configuration.GetConnectionString("DriverDatabase")));
 
 // Register DriverManagerService as gRPC service (its implementation will use DbContext)
 builder.Services.AddScoped<DriverManagerService>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularClient",
+        policy => policy
+            .WithOrigins("http://localhost:4200")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials());
+});
 
 builder.Services.AddControllers();
 
@@ -41,13 +57,25 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-// Map gRPC service
+app.UseCors("AllowAngularClient");
+
+// gRPC endpoints
 app.MapGrpcService<DriverManagerService>();
-
-app.MapControllers();
-
-// Add optional lightweight REST endpoint for testing / Angular
 app.MapGet("/", () => "gRPC DriverService is running. Use a gRPC client to connect.");
-app.MapGet("/api/drivers/health", () => Results.Ok(new { status = "ok", time = DateTime.UtcNow }));
+
+// Map HealthChecks endpoints
+app.MapGet("/health", () => Results.Ok(new { status = "Healthy" }));
+app.MapGet("/health/db", async (DriverDbContext db) =>
+{
+    try
+    {
+        await db.Database.CanConnectAsync();
+        return Results.Ok(new { database = "Connected" });
+    }
+    catch
+    {
+        return Results.Problem("Database unreachable");
+    }
+});
 
 app.Run();
