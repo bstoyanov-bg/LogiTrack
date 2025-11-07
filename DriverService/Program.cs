@@ -18,6 +18,8 @@ builder.Services.AddDbContext<DriverDbContext>(options =>
 // Register DriverManagerService as gRPC service (its implementation will use DbContext)
 builder.Services.AddScoped<DriverManagerService>();
 
+builder.Services.AddControllers();
+
 var app = builder.Build();
 
 // Ensure DB is migrated + seed sample drivers
@@ -41,6 +43,8 @@ using (var scope = app.Services.CreateScope())
 
 // Map gRPC service
 app.MapGrpcService<DriverManagerService>();
+
+app.MapControllers();
 
 // Add optional lightweight REST endpoint for testing / Angular
 app.MapGet("/", () => "gRPC DriverService is running. Use a gRPC client to connect.");

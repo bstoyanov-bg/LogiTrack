@@ -1,86 +1,107 @@
-﻿using Grpc.Core;
+﻿using DriverService.Data;
+using DriverService.Models;
+using Grpc.Core;
+using Microsoft.EntityFrameworkCore;
 
 namespace DriverService.Services;
 
 public class DriverManagerService : DriverManager.DriverManagerBase
 {
-    // In-memory list simulating a database
-    private static readonly List<Driver> _drivers = new()
-        {
-            new Driver { Id = 1, Name = "Ivan Todorov", Status = "Available" },
-            new Driver { Id = 2, Name = "Maria Ivanova", Status = "Busy" },
-            new Driver { Id = 3, Name = "Peter Georgiev", Status = "Available" }
-        };
-
+    private readonly DriverDbContext _db;
     private readonly ILogger<DriverManagerService> _logger;
 
-    public DriverManagerService(ILogger<DriverManagerService> logger)
+    public DriverManagerService(DriverDbContext db, ILogger<DriverManagerService> logger)
     {
+        _db = db;
         _logger = logger;
     }
 
-    public override Task<AssignShipmentReply> AssignShipment(AssignShipmentRequest request, ServerCallContext context)
+    public override async Task<AssignShipmentReply> AssignShipment(AssignShipmentRequest request, ServerCallContext context)
     {
         // Find first available driver
-        var driver = _drivers.FirstOrDefault(d => d.Status == "Available");
+        var driver = await _db.Drivers
+            .Where(d => d.Status == "Available")
+            .OrderBy(d => d.Id)
+            .FirstOrDefaultAsync();
 
         if (driver == null)
         {
-            return Task.FromResult(new AssignShipmentReply
+            return new AssignShipmentReply
             {
                 DriverId = 0,
                 Message = "No available drivers at the moment."
-            });
+            };
         }
 
-        // Mark driver as busy
+        // Mark driver as Busy and update LastSeen
         driver.Status = "Busy";
-        _logger.LogInformation($"Assigned shipment {request.ShipmentId} to driver {driver.Name}");
+        driver.LastSeenUtc = DateTime.UtcNow;
 
-        return Task.FromResult(new AssignShipmentReply
+        await _db.SaveChangesAsync();
+
+        _logger.LogInformation("Assigned shipment {ShipmentId} to driver {DriverId}", request.ShipmentId, driver.Id);
+
+        return new AssignShipmentReply
         {
             DriverId = driver.Id,
             Message = $"Shipment {request.ShipmentId} assigned to driver {driver.Name}"
-        });
+        };
     }
 
-    public override Task<UpdateDriverStatusReply> UpdateDriverStatus(UpdateDriverStatusRequest request, ServerCallContext context)
+    public override async Task<UpdateDriverStatusReply> UpdateDriverStatus(UpdateDriverStatusRequest request, ServerCallContext context)
     {
-        var driver = _drivers.FirstOrDefault(d => d.Id == request.DriverId);
+        var driver = await _db.Drivers.FindAsync(request.DriverId);
         if (driver == null)
         {
-            return Task.FromResult(new UpdateDriverStatusReply { Message = "Driver not found." });
+            return new UpdateDriverStatusReply { Success = false, Message = "Driver not found." };
         }
 
         driver.Status = request.Status;
-        _logger.LogInformation($"Driver {driver.Name} status updated to {request.Status}");
+        driver.LastSeenUtc = DateTime.UtcNow;
 
-        return Task.FromResult(new UpdateDriverStatusReply { Message = "Driver status updated successfully." });
+        await _db.SaveChangesAsync();
+
+        _logger.LogInformation("Driver {DriverId} status updated to {Status}", driver.Id, request.Status);
+
+        return new UpdateDriverStatusReply { Success = true, Message = "Driver status updated successfully." };
     }
 
-    public override Task<RegisterDriverReply> RegisterDriver(RegisterDriverRequest request, ServerCallContext context)
+    public override async Task<RegisterDriverReply> RegisterDriver(RegisterDriverRequest request, ServerCallContext context)
     {
-        var newDriver = new Driver
+        var driver = new DriverEntity
         {
-            Id = _drivers.Max(d => d.Id) + 1,
             Name = request.Name,
-            Status = "Available"
+            Status = "Available",
+            LastSeenUtc = DateTime.UtcNow
         };
 
-        _drivers.Add(newDriver);
-        _logger.LogInformation($"Registered new driver: {newDriver.Name}");
+        _db.Drivers.Add(driver);
 
-        return Task.FromResult(new RegisterDriverReply
+        await _db.SaveChangesAsync();
+
+        _logger.LogInformation("Registered new driver: {Name} (Id={Id})", driver.Name, driver.Id);
+
+        return new RegisterDriverReply
         {
-            DriverId = newDriver.Id,
-            Message = $"Driver {newDriver.Name} registered successfully."
-        });
+            DriverId = driver.Id,
+            Message = $"Driver {driver.Name} registered successfully."
+        };
     }
 
-    public override Task<DriverListReply> GetAllDrivers(Empty request, ServerCallContext context)
+    public override async Task<DriverListReply> GetAllDrivers(Empty request, ServerCallContext context)
     {
+        var drivers = await _db.Drivers.ToListAsync();
         var reply = new DriverListReply();
-        reply.Drivers.AddRange(_drivers);
-        return Task.FromResult(reply);
+
+        foreach (var d in drivers)
+        {
+            reply.Drivers.Add(new Driver
+            {
+                Id = d.Id,
+                Name = d.Name,
+                Status = d.Status
+            });
+        }
+        return reply;
     }
 }
