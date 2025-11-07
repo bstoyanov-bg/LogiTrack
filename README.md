@@ -25,13 +25,17 @@ The platform currently consists of the following key components:
 - Full CRUD operations via REST API  
 - Redis caching for `GetAllShipments`  
 - Real-time updates via SignalR Hub  
-- gRPC communication with DriverService for driver assignment  
+- gRPC communication with DriverService for driver assignment
+- SQL Server persistence    
 
 ✅ **Driver Management**
 - Dedicated DriverService with EF Core and SQL  
 - REST API endpoints for drivers (`/api/drivers`)  
 - gRPC endpoints (`DriverManager`) for assignment, registration, and status updates  
 - Automatic seeding on startup  
+- SQL Server database with EF Core  
+- Driver registration and status updates  
+- Angular dashboard with live controls  
 
 ✅ **Health Monitoring**
 - `/health` and `/health/db` endpoints in both services  
@@ -41,6 +45,7 @@ The platform currently consists of the following key components:
 - Angular dashboards for Shipments and Drivers  
 - Real-time UI updates (SignalR push, no manual refresh)  
 - Health monitoring and connection indicators  
+- Driver registration and live status dropdowns  
 
 ---
 
