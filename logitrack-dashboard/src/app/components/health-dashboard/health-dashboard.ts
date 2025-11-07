@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HealthService } from '../services/health.service';
 import { CommonModule } from '@angular/common';
+import { HealthService } from '../../services/health.service';
 
 @Component({
   selector: 'app-health-dashboard',

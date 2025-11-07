@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShipmentDashboardComponent } from './components/shipment-dashboard/shipment-dashboard';
 import { ShipmentService } from './services/shipment.service';
-import { HealthDashboardComponent } from './health-dashboard/health-dashboard';
+import { HealthDashboardComponent } from './components/health-dashboard/health-dashboard';
+import { DriversDashboardComponent } from "./components/drivers-dashboard/drivers-dashboard";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, ShipmentDashboardComponent, HealthDashboardComponent],
+  imports: [CommonModule, ShipmentDashboardComponent, HealthDashboardComponent, DriversDashboardComponent],
   templateUrl: './app.html',
   styleUrls: ['./app.scss']
 })

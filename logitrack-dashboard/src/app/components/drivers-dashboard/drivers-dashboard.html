@@ -1,0 +1,16 @@
+<div class="container">
+  <h3>Drivers</h3>
+  <div *ngIf="loading">Loading…</div>
+  <table *ngIf="!loading">
+    <thead>
+      <tr><th>ID</th><th>Name</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let d of drivers">
+        <td>{{ d.id }}</td>
+        <td>{{ d.name }}</td>
+        <td>{{ d.status }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
