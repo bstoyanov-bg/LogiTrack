@@ -81,3 +81,27 @@ graph TD
     D -->|SQL Queries| E
     A -->|/health| F
     D -->|/health| F
+
+
+Updated Project Structure
+LogiTrack/
+├── src/
+│   ├── ShipmentService/        → ASP.NET Core Web API for managing shipments (CRUD, caching, SignalR, gRPC)
+│   ├── DriverService/          → ASP.NET Core service managing drivers (status, registration, SQL)
+│   ├── Client/                 → Angular front-end dashboard for Shipments & Drivers
+│   └── LogiTrack.Contracts/    → (Coming soon) Shared message contracts for RabbitMQ / Kafka
+│
+├── .github/                    → CI/CD workflows and automation
+├── LogiTrack.sln               → Solution file linking backend projects
+└── README.md                   → Documentation and usage guide
+
+🧭 Updated Architecture Overview
+Layer	Component	Description	Technologies
+Frontend	Client	Angular dashboard for real-time shipments and driver management via REST & SignalR	Angular 20, RxJS, Material
+Backend Services	ShipmentService	Handles shipment lifecycle (CRUD, Redis caching, SignalR notifications, gRPC to DriverService)	ASP.NET Core 10, EF Core, Redis, SignalR
+	DriverService	Manages driver registration, availability, and status updates	ASP.NET Core 10, EF Core
+Data Stores	SQL Server	Separate databases for Shipments and Drivers	Entity Framework Core
+	Redis Cache	High-speed caching for shipment lookups	StackExchange.Redis
+Inter-Service Communication	gRPC	Fast binary protocol between ShipmentService ↔ DriverService	gRPC
+Monitoring	Health Endpoints	/health checks for each service, integrated with Docker or Kubernetes probes	ASP.NET Core HealthChecks
+Next Phase	LogiTrack.Contracts + Message Broker	RabbitMQ or Kafka for shipment assignment events and async updates	.NET, Kafka/RabbitMQ
