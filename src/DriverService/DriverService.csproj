@@ -27,4 +27,8 @@
 	  <Protobuf Include="Protos\driver.proto" GrpcServices="Server" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LogiTrack.Contracts\LogiTrack.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>
