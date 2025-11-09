@@ -81,7 +81,7 @@ graph TD
     D -->|SQL Queries| E
     A -->|/health| F
     D -->|/health| F
-
+```
 
 Updated Project Structure
 LogiTrack/
