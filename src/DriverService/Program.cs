@@ -1,6 +1,7 @@
 using DriverService.Data;
 using DriverService.Models;
 using DriverService.Services;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
@@ -35,6 +36,26 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddControllers();
+
+// MassTransit - consumer that reacts to ShipmentAssigned
+builder.Services.AddMassTransit(x =>
+{
+    x.AddConsumer<ShipmentAssignedConsumer>();
+
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host("localhost", "/", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+
+        cfg.ReceiveEndpoint("driverservice-shipment-assigned-queue", e =>
+        {
+            e.ConfigureConsumer<ShipmentAssignedConsumer>(context);
+        });
+    });
+});
 
 var app = builder.Build();
 

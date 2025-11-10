@@ -37,8 +37,4 @@
 	  <ProjectReference Include="..\LogiTrack.Contracts\LogiTrack.Contracts.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="NewFolder\" />
-	</ItemGroup>
-
 </Project>

@@ -7,7 +7,8 @@ namespace ShipmentService.Models
         Created = 1,
         InTransit = 2,
         Delivered = 3,
-        Cancelled = 4
+        Cancelled = 4,
+        Assigned = 5
     }
 
     public class Shipment
@@ -26,5 +27,6 @@ namespace ShipmentService.Models
         public ShipmentStatus Status { get; set; } = ShipmentStatus.Created;
         [Required]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public int? AssignedDriverId { get; set; }
     }
 }

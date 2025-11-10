@@ -1,13 +1,13 @@
 ﻿using DriverService;
+using LogiTrack.Contracts.Events;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Distributed;
 using ShipmentService.Data;
 using ShipmentService.Hubs;
 using ShipmentService.Models;
 using ShipmentService.Services;
-using System.Text.Json;
 
 namespace ShipmentService.Controllers
 {
@@ -20,19 +20,21 @@ namespace ShipmentService.Controllers
         private readonly ILogger<ShipmentsController> _logger;
         private readonly DriverManager.DriverManagerClient _driverClient;
         private readonly IHubContext<ShipmentHub> _hubContext;
-
+        private readonly IPublishEndpoint _publish;
 
         public ShipmentsController(AppDbContext dbContext, 
             ShipmentCacheService cache, 
             ILogger<ShipmentsController> logger, 
             DriverManager.DriverManagerClient driverClient,
-            IHubContext<ShipmentHub> hubContext)
+            IHubContext<ShipmentHub> hubContext, 
+            IPublishEndpoint publish)
         {
             _dbContext = dbContext;
             _cache = cache;
             _logger = logger;
             _driverClient = driverClient;
             _hubContext = hubContext;
+            _publish = publish;
         }
 
         [HttpGet]
@@ -148,6 +150,36 @@ namespace ShipmentService.Controllers
             await _cache.RemoveAllShipmentsAsync();
 
             return NoContent();
+        }
+
+        [HttpPost("{id}/assign/{driverId}")]
+        public async Task<IActionResult> Assign(int id, int driverId)
+        {
+            var shipment = await _dbContext.Shipments.FindAsync(id);
+            if (shipment == null) return NotFound();
+
+            // et assignment
+            shipment.AssignedDriverId = driverId;
+            shipment.Status = ShipmentStatus.Assigned;
+            await _dbContext.SaveChangesAsync();
+
+            // Publish event
+            var evt = new ShipmentAssigned
+            {
+                ShipmentId = shipment.Id,
+                DriverId = driverId,
+                TrackingNumber = shipment.TrackingNumber,
+                AssignedAtUtc = DateTime.UtcNow
+            };
+
+            await _publish.Publish(evt);
+
+            // Update cache entry
+            await _cache.SetShipmentAsync(shipment);
+            // Broadcast the shipment change
+            await _hubContext.Clients.All.SendAsync("ShipmentUpdated", shipment);
+
+            return Ok(shipment);
         }
     }
 }
