@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
+import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HealthService } from './health.service';
@@ -54,6 +54,12 @@ export class ShipmentService {
      this.shipmentsSubject.next(filtered);
    });
 
+    this.hubConnection.on('ShipmentAssigned', (shipment: Shipment) => {
+      const updated = this.shipmentsSubject.value.map(s =>
+        s.id === shipment.id ? shipment : s);
+      this.shipmentsSubject.next(updated);
+    });
+
    // Start connection and track status
    this.hubConnection.start()
     .then(() => {
@@ -69,5 +75,9 @@ export class ShipmentService {
   /** Stop connection (optional, e.g. when user logs out) */
   stopSignalR() {
     this.hubConnection?.stop();
+  }
+
+  assignDriver(shipmentId: number, driverId: number) {
+    return this.http.post<Shipment>(`${environment.shipmentServiceBaseUrl}/shipments/${shipmentId}/assign/${driverId}`, {});
   }
 }

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ShipmentDashboardComponent } from './components/shipment-dashboard/shipment-dashboard';
+import { ShipmentDashboardComponent } from './components/shipments/shipment-dashboard/shipment-dashboard';
 import { ShipmentService } from './services/shipment.service';
 import { HealthDashboardComponent } from './components/health-dashboard/health-dashboard';
-import { DriversDashboardComponent } from './components/drivers-dashboard/drivers-dashboard';
+import { DriversDashboardComponent } from './components/drivers/drivers-dashboard/drivers-dashboard';
 
 @Component({
   selector: 'app-root',

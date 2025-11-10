@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { Driver, DriverService } from '../../services/driver.service';
+import { Driver, DriverService } from '../../../services/driver.service';
 
 @Component({
   selector: 'app-drivers-dashboard',

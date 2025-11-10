@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Assign Driver</h2>
+<mat-dialog-content>
+  <div *ngIf="loading" class="p-4 text-center">Loading drivers…</div>
+
+  <mat-form-field appearance="outline" *ngIf="!loading">
+    <mat-label>Select Driver</mat-label>
+    <mat-select [(value)]="selectedDriverId">
+      <mat-option *ngFor="let d of drivers" [value]="d.id">
+        {{ d.name }} ({{ d.status }})
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-stroked-button (click)="cancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="confirmAssignment()" [disabled]="!selectedDriverId">
+    Assign
+  </button>
+</mat-dialog-actions>
