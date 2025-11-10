@@ -1,3 +1,4 @@
+using DriverService.Consumers;
 using DriverService.Data;
 using DriverService.Models;
 using DriverService.Services;
