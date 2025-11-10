@@ -1,5 +1,7 @@
 ﻿using DriverService;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using ShipmentService.Consumers;
 using ShipmentService.Data;
 using ShipmentService.Hubs;
 using ShipmentService.Middleware;
@@ -49,6 +51,27 @@ builder.Services.AddGrpcClient<DriverManager.DriverManagerClient>(o =>
 
 AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
 
+// MassTransit config
+builder.Services.AddMassTransit(x =>
+{
+    // Consumer for DriverUpdated (so we can broadcast over SignalR)
+    x.AddConsumer<DriverUpdatedConsumer>();
+
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host("localhost", "/", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+
+        cfg.ReceiveEndpoint("shipmentservice-driver-updated-queue", e =>
+        {
+            e.ConfigureConsumer<DriverUpdatedConsumer>(context);
+        });
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -65,9 +88,9 @@ app.UseCors("AllowAngularClient");
 // Custom middleware to measure request time
 app.UseResponseTimeMiddleware();
 
-app.MapControllers();
 // SignalR Hubs
 app.MapHub<ShipmentHub>("/hub/shipments");
 
+app.MapControllers();
 
 app.Run();
